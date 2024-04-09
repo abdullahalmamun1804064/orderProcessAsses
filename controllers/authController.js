@@ -3,10 +3,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const sendToken = require('../utils/jwtToken');
 const ErrorHandler = require('../utils/errorHandler');
 
-// Register a user   => /api/v1/register
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
-
-
     const { name, email, password, confirmPassword } = req.body;
 
     if (password !== confirmPassword) {
@@ -22,7 +19,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-// Login user   => /api/v1/login
 
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 
@@ -31,15 +27,11 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
     if (!email || !password) {
         return next(new ErrorHandler('Please enter email & password', 400))
     }
-
-    // Finding user in database
     const user = await User.findOne({ email }).select('+password')
 
     if (!user) {
         return next(new ErrorHandler('Invalid Email or Password', 401));
     }
-
-    // Checks if password is correct or not
     const isPasswordMatched = await user.comparePassword(password);
 
     if (!isPasswordMatched) {
@@ -50,7 +42,6 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 })
 
 
-// Logout user   =>   /api/v1/logout
 exports.logout = catchAsyncErrors(async (req, res, next) => {
     res.cookie('token', null, {
         expires: new Date(Date.now()),

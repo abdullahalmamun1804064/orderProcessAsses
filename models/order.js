@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
 
-const commentSchema = new mongoose.Schema({
-
-    blog: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Blog',
-        required: true
-    },
-
-    author: {
+const orderSchema = new mongoose.Schema({
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true
     },
-
-    comment: {
+    productIds: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true
+    }],
+    quantities: {
+        type: [Number],
+        required: true
+    },
+    paymentInfo: {
         type: String,
         required: true
     },
@@ -22,10 +23,8 @@ const commentSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-
 }, {
     timestamps: true
 });
 
-
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Order', orderSchema);

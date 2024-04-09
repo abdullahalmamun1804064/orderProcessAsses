@@ -22,13 +22,16 @@ app.use('*', cors({
 // Import all routes
 
 const auth = require('./routes/auth');
-// const comment = require('./routes/comment');
+const product = require('./routes/product');
+const order = require('./routes/order');
  
 
 
 
 app.use('/api/v1', auth)
-// app.use('/api/v1/comment', comment);
+app.use('/api/v1/products', product);
+app.use('/api/v1/orders', order);
+
 
 
 // Middleware to handle errors
