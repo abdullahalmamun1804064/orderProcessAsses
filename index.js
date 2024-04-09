@@ -7,7 +7,6 @@ process.on('uncaughtException', err => {
     console.log('Shutting down due to uncaught exception');
     process.exit(1)
 })
-console.log("App is Running");
 // Setting up config file
 if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'config/config.env' })
 
