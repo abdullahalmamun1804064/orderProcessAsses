@@ -27,7 +27,9 @@ const order = require('./routes/order');
  
 
 
-
+app.get('/', function (req, res) {
+    res.render('index.ejs');
+});
 app.use('/api/v1', auth)
 app.use('/api/v1/products', product);
 app.use('/api/v1/orders', order);
