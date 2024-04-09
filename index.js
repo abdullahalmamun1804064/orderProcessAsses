@@ -7,7 +7,7 @@ process.on('uncaughtException', err => {
     console.log('Shutting down due to uncaught exception');
     process.exit(1)
 })
-
+console.log("App is Running");
 // Setting up config file
 if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'config/config.env' })
 
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'con
 connectDatabase();
 
 // Setting up cloudinary configuration
-console.log("App is Running");
+
 
 const server = app.listen(process.env.PORT, () => {
     console.log(`Server started on PORT: ${process.env.PORT} in ${process.env.NODE_ENV} mode.`)
