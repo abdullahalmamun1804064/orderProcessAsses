@@ -9,18 +9,21 @@ const userSchema = new mongoose.Schema({
         maxLength: [30, 'Your name cannot exceed 30 characters'],
     },
 
-    
+
     email: {
         type: String,
-        required: [true, 'Please provide your email'],
+        unique: [true,'This email is already in used'],
+        required: [true, 'Please provide your email']
+      
     },
+
     password: {
         type: String,
         required: [true, 'Please provide a password'],
         minlength: [6, 'Your password must be longer than 6 characters'],
         select: false
     },
-    
+
     is_active: {
         type: Boolean,
         default: true

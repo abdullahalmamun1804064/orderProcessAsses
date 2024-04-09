@@ -4,22 +4,22 @@ const ErrorHandler = require('../utils/errorHandler');
 
 exports.createOrder = catchAsyncErrors(async (req, res, next) => {
   try {
-    const { userId, productIds, quantities, paymentInfo } = req.body;
+    const { userId, productId, quantities, paymentInfo } = req.body;
 
-    if (!userId || !productIds || !quantities || !paymentInfo) {
-      return next(new ErrorHandler('Invalid data. Order must contain userId, productIds, quantities, and paymentInfo', 400));
+    if (!userId || !productId || !quantities || !paymentInfo) {
+      return next(new ErrorHandler('Invalid data. Order must contain userId, productId, quantities, and paymentInfo', 400));
     }
 
     const newOrder = new Order({
       userId,
-      productIds,
+      productId,
       quantities,
       paymentInfo
     });
 
     const savedOrder = await newOrder.save();
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       order: savedOrder
     });
@@ -97,7 +97,7 @@ exports.deleteOrder = catchAsyncErrors(async (req, res, next) => {
     if (!deletedOrder) {
       return next(new ErrorHandler('Order not found', 404));
     }
-    res.status(204).json({
+    res.status(200).json({
       success: true
     });
   } catch (error) {
