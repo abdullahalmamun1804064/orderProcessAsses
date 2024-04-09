@@ -24,11 +24,11 @@ app.use('*', cors({
 const auth = require('./routes/auth');
 const product = require('./routes/product');
 const order = require('./routes/order');
- 
+
 
 
 app.get('/', function (req, res) {
-    res.send("Hello World!"); 
+    res.send("App is Running Successfully");
 });
 app.use('/api/v1', auth)
 app.use('/api/v1/products', product);
